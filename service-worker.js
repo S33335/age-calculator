@@ -1,23 +1,25 @@
-const cacheName = 'age-calculator-v1';
-const assets = [
-    '/index.html',
-    '/styles.css',
-    '/script.js',
-    '/manifest.json',
-    '/icon.png'
+const CACHE_NAME = 'age-calculator-v2';
+const urlsToCache = [
+    './',
+    './index.html',
+    './styles.css',
+    './script.js',
+    './manifest.json',
+    './icons/icon-192x192.png',
+    './icons/icon-512x512.png'
 ];
 
-self.addEventListener('install', event => {
+self.addEventListener('install', (event) => {
     event.waitUntil(
-        caches.open(cacheName).then(cache => {
-            return cache.addAll(assets);
+        caches.open(CACHE_NAME).then((cache) => {
+            return cache.addAll(urlsToCache);
         })
     );
 });
 
-self.addEventListener('fetch', event => {
+self.addEventListener('fetch', (event) => {
     event.respondWith(
-        caches.match(event.request).then(response => {
+        caches.match(event.request).then((response) => {
             return response || fetch(event.request);
         })
     );

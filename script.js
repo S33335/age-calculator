@@ -19,7 +19,11 @@ document.getElementById('calculate').addEventListener('click', function() {
 
 // Register the service worker for PWA
 if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/service-worker.js').then(function() {
-        console.log('Service Worker Registered');
-    });
+    navigator.serviceWorker.register('/service-worker.js')
+        .then((registration) => {
+            console.log('Service Worker Registered:', registration);
+        })
+        .catch((error) => {
+            console.error('Service Worker registration failed:', error);
+        });
 }
